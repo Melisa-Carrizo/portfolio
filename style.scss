@@ -1,0 +1,414 @@
+
+@use "sass:color";
+// Variables
+$background-dark: #0a0a0a;
+$primary-dark: #1f1f1f;
+$secondary-dark: #333333;
+$accent-color: #00ff99;
+$text-light: #e5e5e5;
+$text-dark: #a3a3a3;
+$font-mono: 'Roboto Mono', monospace;
+
+// Mixin para estilos de cursor
+@mixin cursor-blink {
+    @keyframes cursor-blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+    }
+}
+
+// Estilos Generales y Reset
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: $font-mono;
+    background-color: $background-dark;
+    color: $text-light;
+    line-height: 1.6;
+
+    // Estilo de Scrollbar
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+    &::-webkit-scrollbar-track {
+        background: $background-dark;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: $secondary-dark;
+        border-radius: 4px;
+        &:hover {
+            background: $accent-color;
+        }
+    }
+}
+
+a {
+    color: $accent-color;
+    text-decoration: none;
+    transition: color 0.2s;
+    &:hover {
+    color: color.adjust($accent-color, $lightness: 10%); 
+}
+}
+
+.container {
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 50px; 
+}
+
+.section-padding {
+    padding: 80px 0;
+    min-height: auto;
+}
+
+// --- Barra de Navegación ---
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 75px;
+    background-color: rgba($background-dark, 0.9);
+    z-index: 1000;
+
+    .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: $accent-color;
+    }
+
+    nav a {
+        margin-left: 20px;
+        color: $text-light;
+        font-size: 0.9rem;
+        &:hover {
+            color: $accent-color;
+        }
+    }
+}
+
+// --- Barras Laterales (Social y Email) ---
+.social-bar, .email-bar {
+    position: fixed;
+    bottom: 0;
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 999;
+}
+
+.social-bar {
+    left: 50px;
+    ul {
+        list-style: none;
+        li {
+            padding: 10px 0;
+            a {
+                display: block;
+                color: $text-dark;
+                transition: transform 0.3s;
+                &:hover {
+                    color: $accent-color;
+                    transform: translateY(-3px);
+                }
+                svg {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+        }
+    }
+    &::after {
+        content: '';
+        display: block;
+        width: 1px;
+        height: 90px;
+        background-color: $secondary-dark;
+        margin-top: 20px;
+    }
+}
+
+.email-bar {
+    right: 50px;
+    a {
+        writing-mode: vertical-rl;
+        letter-spacing: 0.1em;
+        margin-bottom: 20px;
+        color: $text-dark;
+        &:hover {
+            color: $accent-color;
+            transform: translateY(-3px);
+        }
+    }
+    &::after {
+        content: '';
+        display: block;
+        width: 1px;
+        height: 90px;
+        background-color: $secondary-dark;
+        margin-bottom: 20px;
+    }
+}
+
+
+// --- Sección Héroe (00) ---
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 150px;
+    
+    .intro-line {
+        color: $accent-color;
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
+    .main-title {
+        font-size: 4rem;
+        font-weight: 700;
+        color: $text-light;
+        margin-bottom: 5px;
+    }
+
+    .dynamic-text {
+        font-size: 3.5rem;
+        font-weight: 500;
+        color: $text-dark;
+        margin-bottom: 25px;
+
+        #dynamic-role {
+            display: inline-block;
+            border-right: 2px solid $accent-color;
+            padding-right: 5px; 
+            @include cursor-blink();
+            animation: cursor-blink 1.2s infinite;
+        }
+    }
+
+    .description-text {
+        max-width: 500px;
+        color: $text-dark;
+        margin-bottom: 50px;
+    }
+}
+
+// --- Botón de Acción ---
+.action-button {
+    display: inline-block;
+    padding: 15px 25px;
+    border: 1px solid $accent-color;
+    color: $accent-color;
+    font-size: 0.9rem;
+    transition: background-color 0.2s, color 0.2s;
+    
+    &:hover {
+        background-color: rgba($accent-color, 0.1);
+        color: $accent-color;
+    }
+}
+
+
+// --- Títulos de Sección (01, 02, 03, 04) ---
+.section-title {
+    font-size: 2rem;
+    font-weight: 500;
+    color: $text-light;
+    margin-bottom: 40px;
+
+    &::before {
+        content: attr(data-index); 
+        color: $accent-color;
+        margin-right: 15px;
+    }
+}
+
+// --- Sección About (01) ---
+.about-section .content {
+    max-width: 800px;
+    p {
+        margin-bottom: 20px;
+        color: $text-dark;
+    }
+}
+
+// --- Sección Stack (02) ---
+.stack-section .grid-container {
+    display: flex;
+    gap: 30px;
+}
+
+.stack-card {
+    background-color: $primary-dark;
+    padding: 25px;
+    border-radius: 4px;
+    width: 50%;
+    
+    h3 {
+        color: $accent-color;
+        margin-bottom: 15px;
+        font-weight: 700;
+        font-size: 1.1rem;
+    }
+
+    .list-cols {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        
+        li {
+            width: 50%;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            color: $text-dark;
+            &:hover {
+                color: $accent-color;
+            }
+        }
+    }
+}
+
+// --- Sección Projects (03) ---
+.projects-section .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+}
+
+.project-card {
+    background-color: $primary-dark;
+    padding: 30px;
+    border-radius: 4px;
+    border: 1px solid $secondary-dark;
+    transition: transform 0.2s, border-color 0.2s;
+
+    &:hover {
+        transform: translateY(-5px);
+        border-color: $accent-color;
+    }
+
+    .icon-top {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 15px;
+        svg {
+            color: $accent-color;
+            width: 24px;
+            height: 24px;
+        }
+    }
+
+    h3 {
+        color: $text-light;
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        font-weight: 500;
+    }
+
+    p {
+        color: $text-dark;
+        font-size: 0.95rem;
+        margin-bottom: 15px;
+    }
+
+    .tech-stack {
+        color: $accent-color;
+        font-size: 0.8rem;
+        opacity: 0.8;
+    }
+}
+
+// --- Sección Contacto (04) ---
+.contact-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: auto;
+    padding-bottom: 100px;
+    
+    .contact-title {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+    
+    .contact-subtitle {
+        font-size: 3rem;
+        font-weight: 700;
+        color: $text-light;
+        margin-bottom: 20px;
+    }
+    
+    .contact-text {
+        max-width: 500px;
+        color: $text-dark;
+        margin-bottom: 50px;
+    }
+    
+    .action-button {
+        padding: 18px 30px;
+        font-size: 1rem;
+    }
+}
+
+// --- Pie de Página ---
+footer {
+    text-align: center;
+    padding: 20px 0;
+    color: $text-dark;
+    font-size: 0.8rem;
+}
+
+// --- Media Queries (Ajustes de Responsividad) ---
+@media (max-width: 768px) {
+    .container {
+        padding: 0 20px;
+    }
+    
+    .navbar {
+        padding: 20px 20px;
+        nav {
+            display: none; 
+        }
+    }
+
+    .social-bar, .email-bar {
+        display: none; 
+    }
+
+    .hero-section {
+        .main-title {
+            font-size: 3rem;
+        }
+        .dynamic-text {
+            font-size: 2.5rem;
+        }
+    }
+
+    .stack-section .grid-container {
+        flex-direction: column;
+    }
+
+    .stack-card {
+        width: 100%;
+    }
+    
+    .section-padding {
+        padding: 100px 0;
+    }
+}
