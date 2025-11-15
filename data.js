@@ -37,7 +37,7 @@ export const projectData = [
     {
         title: "ReviuBook (Frontend)",
         description: "Reviú Book’s frontend is a user-friendly interface that allows users to browse books, view detailed information, and create reviews and comments. It consumes the backend API to display book data such as title, ISBN, author, publisher, and cover, offering an intuitive and responsive experience for exploring and interacting with the platform.",
-        stack: "Java | JSON | Java FX | University Group Project"
+        stack: "Angular | Typescript | Angular Materials | University Group Project"
     },
     {
         title: "Minirest",
